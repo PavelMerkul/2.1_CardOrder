@@ -123,7 +123,7 @@ public class CardTest {
     void shouldTestCheckBox() {
         $("[data-test-id=name] input").setValue("Павел Громов");
         $("[data-test-id=phone] input").setValue("+79158789966");
-        // $("[data-test-id=agreement]").click();
+        //$("[data-test-id=agreement]").click();
         $(".button__content").click();
         $("[data-test-id=agreement].input_invalid .checkbox__box").should(exist);
     }

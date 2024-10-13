@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import static com.codeborne.selenide.Condition.exactText;
@@ -21,7 +22,10 @@ public class CardTest {
     @AfterEach void tearDown() {
         closeWebDriver();
     }
-
+    @BeforeAll
+    public static void setupAll() {
+        WebDriverManager.chromedriver().setup();
+    }
     @Test
     void shouldTest() {
         $("[data-test-id=name] input").setValue("Гриша Иванов");

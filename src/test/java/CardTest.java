@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import static com.codeborne.selenide.Condition.exactText;
@@ -9,33 +8,26 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class CardTest {
 
-    @BeforeEach
-    void setUp() {
-        open("http://localhost:9999");
-    }
+    // исправленный код
 
     @BeforeEach
-    public void beforeEach() {
+    void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.get("http://localhost:9999");
+        System.setProperty("selenide.browser", "Chrome");
+        System.setProperty("selenide.headless", "true");
+        System.setProperty("selenide.browserSize", "1920x1080");
+        open("http://localhost:9999");
     }
 
-        @Test
+    @Test
     void shouldTest() {
-        open("http://localhost:9999");
-
         $("[data-test-id=name] input").setValue("Гриша Иванов");
-
         $("[data-test-id=phone] input").setValue("+79158789966");
-
         $("[data-test-id=agreement]").click();
-
         $(".button__content").click();
-
         $("[data-test-id=order-success]").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
     }
 
